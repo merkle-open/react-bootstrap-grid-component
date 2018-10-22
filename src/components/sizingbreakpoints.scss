@@ -1,0 +1,34 @@
+// stylelint-disable declaration-no-important
+//
+// Extending Bootstrap default width declaration (h-w-25, h-w-50, h-w-75, h-w-100) with breakpoints
+//
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 640px,
+  md: 1024px,
+  lg: 1440px,
+  xl: 1650px
+);
+
+$helper-css-prefix: "";
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+    .#{$helper-css-prefix}w#{$infix}-#{25} {
+      width: 25% !important;
+    }
+    .#{$helper-css-prefix}w#{$infix}-#{50} {
+      width: 50% !important;
+    }
+    .#{$helper-css-prefix}w#{$infix}-#{75} {
+      width: 75% !important;
+    }
+    .#{$helper-css-prefix}w#{$infix}-#{100} {
+      width: 100% !important;
+    }
+    .#{$helper-css-prefix}w#{$infix}-auto {
+      width: auto !important;
+    }
+  }
+}
