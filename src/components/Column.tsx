@@ -1,8 +1,7 @@
 import * as React from "react";
+import { Size, Viewport } from "../config/config";
 import prefixes from "./PrefixManager";
 
-type Size = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-type Viewport = "xs" | "sm" | "md" | "lg" | "xl";
 type Direction = "row" | "col";
 type DirectionViewport = { [key in Viewport]?: Direction };
 type VerticalAlignment = "top" | "center" | "bottom" | "justify";

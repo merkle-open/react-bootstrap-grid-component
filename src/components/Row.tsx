@@ -1,36 +1,81 @@
 import * as React from "react";
+import { Viewport } from "../config/config";
 import { Column } from "./Column";
 import prefixes from "./PrefixManager";
+
+type VerticalAlignment = "center" | "baseline";
+type VerticalAlignmentViewport = { [key in Viewport]?: VerticalAlignment };
+type HorizontalAlignment = "start" | "center" | "between" | "end";
+type HorizontalAlignmentViewport = { [key in Viewport]?: HorizontalAlignment };
 
 interface Props {
   /**
    * https://getbootstrap.com/docs/4.0/layout/grid/#vertical-alignment
    */
-  verticalAlignment?: "center" | "baseline";
+  verticalAlignment?: VerticalAlignment | VerticalAlignmentViewport;
   /**
    * https://getbootstrap.com/docs/4.0/layout/grid/#horizontal-alignment
    */
-  horizontalAlignment?: "start" | "center" | "between" | "end";
+  horizontalAlignment?: HorizontalAlignment | HorizontalAlignmentViewport;
   /**
    * Rows must contain only columns to prevent negative margin issues
    */
   children: Array<React.ReactElement<Column>> | React.ReactElement<Column>;
 }
 
+const viewportClassPrefix = (viewport: Viewport) =>
+  viewport === "xs" ? "" : "-" + viewport;
+
 export class Row extends React.Component<Props> {
   public render() {
+    const { verticalAlignment, horizontalAlignment } = this.props;
     const classNames = [`${prefixes.row}row`];
+    const verticalAlignmentBreakpoints =
+      typeof verticalAlignment === "string"
+        ? { xs: verticalAlignment }
+        : verticalAlignment || {};
 
-    if (this.props.verticalAlignment) {
-      classNames.push(
-        `${prefixes.column}align-items-${this.props.verticalAlignment}`
+    const horizontalAlignmentBreakpoints =
+      typeof horizontalAlignment === "string"
+        ? { xs: horizontalAlignment }
+        : horizontalAlignment || {};
+
+    if (verticalAlignment) {
+      Object.keys(verticalAlignmentBreakpoints).forEach(
+        (breakpointName: keyof typeof verticalAlignmentBreakpoints) => {
+          const breakpointValue = verticalAlignmentBreakpoints[breakpointName];
+          classNames.push(
+            `${prefixes.column}align-items${viewportClassPrefix(
+              breakpointName
+            )}-${breakpointValue}`
+          );
+        }
       );
+
+      // classNames.push(
+      //   `${prefixes.column}align-items-${verticalAlignment}`
+      // );
     }
 
-    if (this.props.horizontalAlignment) {
-      classNames.push(
-        `${prefixes.column}justify-content-${this.props.horizontalAlignment}`
+    if (horizontalAlignment) {
+      Object.keys(horizontalAlignmentBreakpoints).forEach(
+        (breakpointName: keyof typeof horizontalAlignmentBreakpoints) => {
+          const breakpointValue =
+            horizontalAlignmentBreakpoints[breakpointName];
+
+          console.log(breakpointName, breakpointValue);
+
+          classNames.push(
+            `${prefixes.column}justify-content${viewportClassPrefix(
+              breakpointName
+            )}-${breakpointValue}`
+          );
+        }
       );
+
+      // classNames.push(
+      //   `${prefixes.column}justify-content-${horizontalAlignment}`
+      // );
     }
     return <div className={classNames.join(" ")}>{this.props.children}</div>;
   }
