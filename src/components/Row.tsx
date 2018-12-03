@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Viewport } from "../config/config";
-import { Column } from "./Column";
 import prefixes from "./PrefixManager";
 
 type VerticalAlignment = "center" | "baseline";
@@ -20,7 +19,7 @@ interface Props {
   /**
    * Rows must contain only columns to prevent negative margin issues
    */
-  children: Array<React.ReactElement<Column>> | React.ReactElement<Column>;
+  children: React.ReactNode;
 }
 
 const viewportClassPrefix = (viewport: Viewport) =>

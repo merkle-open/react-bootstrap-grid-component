@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-  childrne?: any;
+  children?: React.ReactNode;
   fluid?: boolean;
 }
 

@@ -29,6 +29,7 @@ const flexAlignment = {
     },
 
     vertical: {
+      // TODO: Vertical & horizontal => Remove dublicated code
       top: (viewport: Viewport) =>
         `${prefixes.column}justify-content${viewportClassPrefix(
           viewport
@@ -56,6 +57,7 @@ const flexAlignment = {
     },
 
     horizontal: {
+      // TODO: Vertical & horizontal => Remove dublicated code
       left: (viewport: Viewport) =>
         `${prefixes.column}ml${viewportClassPrefix(viewport)}-0 ${
           prefixes.column
@@ -90,6 +92,7 @@ const flexAlignment = {
     },
 
     vertical: {
+      // TODO: Vertical & horizontal => Remove dublicated code
       top: (viewport: Viewport) =>
         `${prefixes.column}align-self${viewportClassPrefix(viewport)}-start ${
           prefixes.column
@@ -109,6 +112,7 @@ const flexAlignment = {
     },
 
     horizontal: {
+      // TODO: Vertical & horizontal => Remove dublicated code
       left: (viewport: Viewport) =>
         `${prefixes.column}ml${viewportClassPrefix(viewport)}-0 ${
           prefixes.column
