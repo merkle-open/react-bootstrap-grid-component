@@ -39,24 +39,56 @@
 }
 .background-helper > div {
   outline: solid 1px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 0, 0, 0.2);
+  background-color: #2a4d69 ;
 }
 .background-helper div:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .background-helper > div > div {
   outline: solid 1px rgba(0, 0, 0, 0.1);
-  background-color: rgba(0, 255, 0, 0.2);
+  background-color: #4b86b4;
 }
 .background-helper > div > div > div {
   outline: solid 1px rgba(0, 0, 0, 0.1);
-  background-color: rgba(0, 0, 255, 0.2);
+  background-color: #adcbe3 ;
 }
 .background-helper > div > div > div > div {
   outline: solid 1px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 0, 255, 0.2);
+  background-color: #e7eff6 ;
 }
 .background-helper > div > div > div > div > div {
   outline: solid 1px rgba(0, 0, 0, 0.1);
-  background-color: rgba(255, 255, 0, 0.2);
+  background-color: #63ace5;
+}
+.background-helper > div > div > div > div > div > div {
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #dfe3ee;
+}
+.background-helper > div > div > div > div > div > div > div {
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #f7f7f7;
+}
+.background-helper > div > div > div > div > div > div > div > div {
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+.background-helper > div > div > div > div > div > div > div > div > div {
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #83d0c9;
+}
+.background-helper > div > div > div > div > div > div > div > div > div > div {
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #65c3ba;
+}
+.background-helper > div > div > div > div > div > div > div > div > div > div > div {
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #54b2a9;
+}
+.background-helper > div > div > div > div > div > div > div > div > div > div > div > div {
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #35a79c;
+}
+.background-helper > div > div > div > div > div > div > div > div > div > div > div > div > div {
+  outline: solid 1px rgba(0, 0, 0, 0.1);
+  background-color: #009688;
 }

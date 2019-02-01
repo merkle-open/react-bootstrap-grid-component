@@ -1,8 +1,9 @@
-// stylelint-disable declaration-no-important
+@import "bootstrap/scss/bootstrap.scss";
+
+//stylelint-disable declaration-no-important
 //
 // Extending Bootstrap default width declaration (h-w-25, h-w-50, h-w-75, h-w-100) with breakpoints
 //
-
 $grid-breakpoints: (
   xs: 0,
   sm: 640px,

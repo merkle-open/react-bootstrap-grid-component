@@ -1,4 +1,5 @@
 let globalPrefix = "";
+let containerPrefix: string | undefined;
 let rowPrefix: string | undefined;
 let columnPrefix: string | undefined;
 
@@ -9,6 +10,14 @@ class PrefixManager {
 
   public get global(): string {
     return globalPrefix;
+  }
+
+  public get container(): string {
+    return containerPrefix || globalPrefix;
+  }
+
+  public set container(prefix: string) {
+    containerPrefix = prefix;
   }
 
   public get row(): string {

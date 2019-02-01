@@ -1,0 +1,31 @@
+.Grid {
+    div[class^='d-flex col-'] {
+        min-height: 100px;
+        max-height: 300px;
+    }
+    .Grid_text {
+        padding: 10px;
+        overflow: visible;
+        overflow-y: scroll;
+        max-height: 300px;
+    }
+}
+
+.Col-verticalAlignment {
+    div[class^='d-flex col-'] {
+        height: 150px;
+        div[class^='d-flex col-'] {
+            height: 95px;
+        }
+    }
+
+    .d-flex .row {
+        min-width: 120px;
+    }
+}
+
+.Row-verticalAlignment {
+    .row {
+        height: 200px;
+    }
+}

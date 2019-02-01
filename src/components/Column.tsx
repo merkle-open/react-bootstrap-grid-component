@@ -8,6 +8,9 @@ type VerticalAlignment = "top" | "center" | "bottom" | "justify";
 type VerticalAlignmentViewport = { [key in Viewport]?: VerticalAlignment };
 type HorizontalAlignment = "left" | "right" | "center" | "stretch";
 type HorizontalAlignmentViewport = { [key in Viewport]?: HorizontalAlignment };
+type AlignmentViewport = VerticalAlignmentViewport | HorizontalAlignmentViewport;
+type Orientation = "vertical" | "horizontal";
+type BreakpointAligment = VerticalAlignment | HorizontalAlignment | undefined;
 
 interface Props {
   children?: any;
@@ -22,14 +25,9 @@ const viewportClassPrefix = (viewport: Viewport) =>
 
 const flexAlignment = {
   row: {
-    direction: {
-      outer: (viewport: Viewport) => ``,
-      inner: (viewport: Viewport) =>
-        `${prefixes.column}flex${viewportClassPrefix(viewport)}-column`
-    },
-
+    direction: (viewport: Viewport) =>
+        `${prefixes.column}flex${viewportClassPrefix(viewport)}-column`,
     vertical: {
-      // TODO: Vertical & horizontal => Remove dublicated code
       top: (viewport: Viewport) =>
         `${prefixes.column}justify-content${viewportClassPrefix(
           viewport
@@ -55,44 +53,12 @@ const flexAlignment = {
           viewport
         )}-stretch`
     },
-
-    horizontal: {
-      // TODO: Vertical & horizontal => Remove dublicated code
-      left: (viewport: Viewport) =>
-        `${prefixes.column}ml${viewportClassPrefix(viewport)}-0 ${
-          prefixes.column
-        }mr${viewportClassPrefix(viewport)}-auto ${
-          prefixes.column
-        }w${viewportClassPrefix(viewport)}-auto`,
-      right: (viewport: Viewport) =>
-        `${prefixes.column}ml${viewportClassPrefix(viewport)}-auto ${
-          prefixes.column
-        }mr${viewportClassPrefix(viewport)}-0 ${
-          prefixes.column
-        }w${viewportClassPrefix(viewport)}-auto`,
-      center: (viewport: Viewport) =>
-        `${prefixes.column}ml${viewportClassPrefix(viewport)}-auto ${
-          prefixes.column
-        }mr${viewportClassPrefix(viewport)}-auto ${
-          prefixes.column
-        }w${viewportClassPrefix(viewport)}-auto`,
-      stretch: (viewport: Viewport) =>
-        `${prefixes.column}ml${viewportClassPrefix(viewport)}-0 ${
-          prefixes.column
-        }mr${viewportClassPrefix(viewport)}-0 ${
-          prefixes.column
-        }w${viewportClassPrefix(viewport)}-100`
-    }
   },
   col: {
-    direction: {
-      outer: (viewport: Viewport) => ``,
-      inner: (viewport: Viewport) =>
-        `${prefixes.column}flex${viewportClassPrefix(viewport)}-row`
-    },
+    direction: (viewport: Viewport) =>
+        `${prefixes.column}flex${viewportClassPrefix(viewport)}-row`,
 
     vertical: {
-      // TODO: Vertical & horizontal => Remove dublicated code
       top: (viewport: Viewport) =>
         `${prefixes.column}align-self${viewportClassPrefix(viewport)}-start ${
           prefixes.column
@@ -110,41 +76,39 @@ const flexAlignment = {
           prefixes.column
         }justify-content${viewportClassPrefix(viewport)}-start`
     },
-
-    horizontal: {
-      // TODO: Vertical & horizontal => Remove dublicated code
-      left: (viewport: Viewport) =>
-        `${prefixes.column}ml${viewportClassPrefix(viewport)}-0 ${
-          prefixes.column
-        }mr${viewportClassPrefix(viewport)}-auto ${
-          prefixes.column
-        }w${viewportClassPrefix(viewport)}-auto`,
-      right: (viewport: Viewport) =>
-        `${prefixes.column}ml${viewportClassPrefix(viewport)}-auto ${
-          prefixes.column
-        }mr${viewportClassPrefix(viewport)}-0 ${
-          prefixes.column
-        }w${viewportClassPrefix(viewport)}-auto`,
-      center: (viewport: Viewport) =>
-        `${prefixes.column}ml${viewportClassPrefix(viewport)}-auto ${
-          prefixes.column
-        }mr${viewportClassPrefix(viewport)}-auto ${
-          prefixes.column
-        }w${viewportClassPrefix(viewport)}-auto`,
-      stretch: (viewport: Viewport) =>
-        `${prefixes.column}ml${viewportClassPrefix(viewport)}-0 ${
-          prefixes.column
-        }mr${viewportClassPrefix(viewport)}-0 ${
-          prefixes.column
-        }w${viewportClassPrefix(viewport)}-100`
-    }
+  },
+  horizontal: {
+    left: (viewport: Viewport) =>
+      `${prefixes.column}ml${viewportClassPrefix(viewport)}-0 ${
+        prefixes.column
+      }mr${viewportClassPrefix(viewport)}-auto ${
+        prefixes.column
+      }w${viewportClassPrefix(viewport)}-auto`,
+    right: (viewport: Viewport) =>
+      `${prefixes.column}ml${viewportClassPrefix(viewport)}-auto ${
+        prefixes.column
+      }mr${viewportClassPrefix(viewport)}-0 ${
+        prefixes.column
+      }w${viewportClassPrefix(viewport)}-auto`,
+    center: (viewport: Viewport) =>
+      `${prefixes.column}ml${viewportClassPrefix(viewport)}-auto ${
+        prefixes.column
+      }mr${viewportClassPrefix(viewport)}-auto ${
+        prefixes.column
+      }w${viewportClassPrefix(viewport)}-auto`,
+    stretch: (viewport: Viewport) =>
+      `${prefixes.column}ml${viewportClassPrefix(viewport)}-0 ${
+        prefixes.column
+      }mr${viewportClassPrefix(viewport)}-0 ${
+        prefixes.column
+      }w${viewportClassPrefix(viewport)}-100`
   }
 };
 
 function getDirectionForBreakpoints(
   directionBreakpoints: DirectionViewport
 ): { [key in Viewport]: Direction } {
-  let lastBreakpoint = directionBreakpoints.xs || "top";
+  let lastBreakpoint = directionBreakpoints.xs || "row";
   const breakpointDirections = {
     xs: lastBreakpoint
   };
@@ -155,6 +119,60 @@ function getDirectionForBreakpoints(
   });
   return breakpointDirections as any;
 }
+
+function populateOuterClasses(sizeBreakpointsName: Viewport, breakpointSize: number | undefined): (string[]) {
+  const outerClassNames:string[] = [];
+
+  if(breakpointSize === 0){
+    outerClassNames.push(`${prefixes.row}d${viewportClassPrefix(
+      sizeBreakpointsName
+    )}-none`);
+  } else {
+    outerClassNames.push(`${prefixes.row}d${viewportClassPrefix(
+      sizeBreakpointsName
+    )}-flex`);
+    outerClassNames.push(`${prefixes.row}col${viewportClassPrefix(
+      sizeBreakpointsName
+    )}-${breakpointSize}`)
+  }
+
+  return outerClassNames;
+}
+
+function getClassName(breakpointName: Viewport, breakpointAlignment: BreakpointAligment, orientation: Orientation,
+  flexDirection: string): (string) {
+    let className:string = "";
+    if (flexAlignment[flexDirection][orientation]) {
+      className = flexAlignment[flexDirection][orientation][
+        breakpointAlignment
+      ](breakpointName);
+    } else {
+      className = flexAlignment[orientation][breakpointAlignment](breakpointName);
+    }
+    return className;
+}
+
+function populateInnerClasses(alignmentBreakpoints: AlignmentViewport, calculatedFlexDirections: Object, 
+  orientation: Orientation): ( string[]) {
+    const innerClassName:string[] = [];
+    
+    Object.keys(alignmentBreakpoints).forEach(
+      (
+        breakpointName: keyof typeof alignmentBreakpoints
+      ) => {
+        const flexDirection = calculatedFlexDirections[breakpointName];
+        const breakpointAlignment = alignmentBreakpoints[breakpointName];
+
+        if (breakpointAlignment) {
+          const appointedClassName = getClassName(breakpointName, breakpointAlignment, orientation, flexDirection);
+          innerClassName.push(appointedClassName);
+        }
+      }
+    );
+
+    return innerClassName;
+}
+
 export class Column extends React.PureComponent<Props> {
   public render() {
     const {
@@ -186,17 +204,14 @@ export class Column extends React.PureComponent<Props> {
       horizontalAlignmentBreakpoints.xs = "stretch";
     }
 
-    const outerClassName = [`${prefixes.column}d-flex`];
+    const outerClassName = [''];
     const innerClassName = [`${prefixes.column}d-flex`];
 
     Object.keys(sizeBreakpoints).forEach(
       (sizeBreakpointsName: keyof typeof sizeBreakpoints) => {
         const breakpointSize = sizeBreakpoints[sizeBreakpointsName];
-        outerClassName.push(
-          `${prefixes.row}col${viewportClassPrefix(
-            sizeBreakpointsName
-          )}-${breakpointSize}`
-        );
+        const outerClassNames = populateOuterClasses(sizeBreakpointsName, breakpointSize);
+        outerClassName.push(...outerClassNames);
       }
     );
 
@@ -205,60 +220,20 @@ export class Column extends React.PureComponent<Props> {
         const breakpointDirection =
           directionBreakpoints[directionBreakpointName];
         if (breakpointDirection) {
-          outerClassName.push(
-            flexAlignment[breakpointDirection].direction.outer(
-              directionBreakpointName
-            )
-          );
           innerClassName.push(
-            flexAlignment[breakpointDirection].direction.inner(
-              directionBreakpointName
-            )
+            flexAlignment[breakpointDirection].direction(directionBreakpointName)
           );
         }
       }
     );
 
-    const calculatedFlexDirections = getDirectionForBreakpoints(
-      directionBreakpoints
-    );
-    Object.keys(verticalAlignmentBreakpoints).forEach(
-      (
-        verticalAlignmentBreakpointName: keyof typeof verticalAlignmentBreakpoints
-      ) => {
-        const flexDirection =
-          calculatedFlexDirections[verticalAlignmentBreakpointName];
-        const breakpointVerticalAlignment =
-          verticalAlignmentBreakpoints[verticalAlignmentBreakpointName];
+    const calculatedFlexDirections = getDirectionForBreakpoints(directionBreakpoints);
 
-        if (breakpointVerticalAlignment) {
-          innerClassName.push(
-            flexAlignment[flexDirection].vertical[breakpointVerticalAlignment](
-              verticalAlignmentBreakpointName
-            )
-          );
-        }
-      }
-    );
+    const verticalInnerClassNames = populateInnerClasses(verticalAlignmentBreakpoints, calculatedFlexDirections, "vertical");
+    const horizontalInnerClassNames = populateInnerClasses(horizontalAlignmentBreakpoints, calculatedFlexDirections, "horizontal");
 
-    Object.keys(horizontalAlignmentBreakpoints).forEach(
-      (
-        horizontalAlignmentBreakpointName: keyof typeof horizontalAlignmentBreakpoints
-      ) => {
-        const flexDirection =
-          calculatedFlexDirections[horizontalAlignmentBreakpointName];
-        const breakpointHorizontalAlignment =
-          horizontalAlignmentBreakpoints[horizontalAlignmentBreakpointName];
-        if (breakpointHorizontalAlignment) {
-          innerClassName.push(
-            flexAlignment[flexDirection].horizontal[
-              breakpointHorizontalAlignment
-            ](horizontalAlignmentBreakpointName)
-          );
-        }
-      }
-    );
-
+    innerClassName.push(...verticalInnerClassNames, ...horizontalInnerClassNames);
+ 
     return (
       <div className={outerClassName.join(" ").trim()}>
         <div className={innerClassName.join(" ").trim()}>

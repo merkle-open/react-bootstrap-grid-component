@@ -1,5 +1,17 @@
 # React Bootstrap Grid Component
 
+## Instalation
+
+Run following commands for installation needed packages
+``
+npm install
+``
+
+Start Storybook with
+``
+npm run storybook
+``
+
 ## Components
 
 ### Row
@@ -51,6 +63,19 @@ import { Row } from "./components/Row";
   </Column>
 </Row>
 ```
+#### Properties
+
+```tsx
+direction?: "row" | "col";
+
+size?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+
+verticalAlignment?: "top" | "center" | "bottom" | "justify";
+
+horizontalAlignment?: "left" | "right" | "center" | "stretch";
+```
+
+Note: If you set size to be equal to 0 the column will disappear
 
 ## Additional CSS
 
@@ -59,6 +84,18 @@ import { Row } from "./components/Row";
 This SCSS-File extending the [Bootstrap default width declaration](https://getbootstrap.com/docs/4.0/utilities/sizing/) (h-w-25, h-w-50, h-w-75, h-w-100) with breakpoints.
 
 ### Prefixes
+
+If you want to override some of the default classes of the  bootstrap grid, use prefixes. 
+There are prefixes for container, rows and columns
+
+Depending if you want to apply changes globaly or only in one/couple of components then define
+the prefix on top of desired page
+
+```tsx
+import prefixes from './components/PrefixManager';
+
+prefixes.container | prefixes.column | prefixes.row = 'h-';
+```
 
 ```scss
 $helper-css-prefix: "h-";
