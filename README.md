@@ -41,6 +41,10 @@ verticalAlignment?: "center" | "baseline";
  */
 horizontalAlignment?: "start" | "center" | "between" | "end";
 /**
+   * https://getbootstrap.com/docs/4.0/layout/grid/#no-gutters
+   */
+  noGutters?: boolean;
+/**
   * Rows must contain only columns to prevent negative margin issues
   */
 children: Array<React.ReactElement<Column>> | React.ReactElement<Column>;
@@ -73,6 +77,10 @@ size?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 verticalAlignment?: "top" | "center" | "bottom" | "justify";
 
 horizontalAlignment?: "left" | "right" | "center" | "stretch";
+
+offset?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+
+order?:  0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | "first" | "last";
 ```
 
 Note: If you set size to be equal to 0 the column will disappear
