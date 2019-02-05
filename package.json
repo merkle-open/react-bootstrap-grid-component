@@ -1,6 +1,17 @@
 {
   "name": "react-bootstrap-grid-component",
   "version": "0.1.0",
+  "description": "React Bootstrap Grid",
+  "license": "MIT",
+  "author": "Namics AG",
+  "contributors": [
+    {
+      "name": "Rico Schmidt"
+    },
+    {
+      "name": "Tamara Joncic"
+    }
+  ],
   "private": false,
   "main": "dist/index.js",
   "files": [
@@ -33,12 +44,5 @@
     "storybook-addon-jsx": "6.0.0",
     "storybook-readme": "4.0.5",
     "typescript": "3.2.4"
-  },
-  "description": "React Bootstrap Grid",
-  "author": "Rico Schmidt",
-  "license": "MIT",
-  "contributes": [
-    { "name": "Rico Schmidt" },
-    { "name": "Tamara Joncic" }
-  ]
+  }
 }
