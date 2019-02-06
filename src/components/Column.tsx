@@ -16,7 +16,7 @@ type Order = 'first' | 'last';
 type OrderViewport = { [key in Viewport]?: Size | Order };
 type Placement = 'order' | 'offset';
 
-interface Props {
+export interface ColumnProps {
 	children?: any;
 	size?: Size | { [key in Viewport]?: Size };
 	direction?: Direction | DirectionViewport;
@@ -24,6 +24,7 @@ interface Props {
 	horizontalAlignment?: HorizontalAlignment | HorizontalAlignmentViewport;
 	offset?: Size | { [key in Viewport]?: Size };
 	order?: Size | Order | { [key in Viewport]?: Size | Order };
+	className?: string;
 }
 
 const viewportClassPrefix = (viewport: Viewport) => (viewport === 'xs' ? '' : '-' + viewport);
@@ -165,9 +166,9 @@ function populateInnerClasses(
 	return innerClassName;
 }
 
-export class Column extends React.PureComponent<Props> {
+export class Column extends React.PureComponent<ColumnProps> {
 	public render() {
-		const { size, direction, verticalAlignment, horizontalAlignment, offset, order } = this.props;
+		const { size, direction, verticalAlignment, horizontalAlignment, offset, order, className } = this.props;
 		const sizeBreakpoints = typeof size === 'number' ? { xs: size } : size || {};
 		const directionBreakpoints = typeof direction === 'string' ? { xs: direction } : direction || {};
 		const verticalAlignmentBreakpoints =
@@ -191,7 +192,7 @@ export class Column extends React.PureComponent<Props> {
 			horizontalAlignmentBreakpoints.xs = 'stretch';
 		}
 
-		const outerClassName = [''];
+		const outerClassName = className ? [className] : [];
 		const innerClassName = [`${prefixes.column}d-flex`];
 
 		Object.keys(sizeBreakpoints).forEach((sizeBreakpointsName: keyof typeof sizeBreakpoints) => {
