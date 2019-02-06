@@ -1,32 +1,67 @@
 # React Bootstrap Grid Component
 
-## Instalation
+React Bootstrap Grid is a made to make your life easier while using Bootstrap Grid inside your
+React project. Main concepts of the grid have been transformed into react components such as Container, Row and
+Column. By adding attributes that are defined bellow you can easily implement the grid to your liking or given
+specification.
 
-Run following commands for installation needed packages
-``
-npm install
-``
+## Installation
 
-Start Storybook with
+Install react-bootstrap-grid-component
 ``
-npm run storybook
+npm install react-bootstrap-grid-component
 ``
 
 ## Components
 
-### Row
+### Container
 
-A Row need always Columns as children. Each other node-type will throw an error.
+A Container should always wrap Rows as children. 
 
 #### Usage
 
 ```tsx
-import { Column } from "./components/Column";
-import { Row } from "./components/Row";
+import 'bootstrap/scss/bootstrap.scss';
+import 'react-bootstrap-grid-component/dist/sizingbreakpoints.scss';
+import { Container } from "react-bootstrap-grid-component/dist/Container";
+import { Column } from "react-bootstrap-grid-component/dist/Column";
+import { Row } from "react-bootstrap-grid-component/dist/Row";
 
-<Row>
-  <Column />
-</Row>;
+<Container>
+    <Row>
+        <Column />
+    </Row>
+</Container>
+```
+
+#### Properties
+
+The only property that this component support is the isFlud which when is defined sets the .container-fuild class
+on the wrapping tag
+
+```tsx
+/**
+ *  https://getbootstrap.com/docs/4.1/layout/grid/#how-it-works
+ */
+isFluid?: boolean
+```
+
+### Row
+
+#### Usage
+
+```tsx
+import 'bootstrap/scss/bootstrap.scss';
+import 'react-bootstrap-grid-component/dist/sizingbreakpoints.scss';
+import { Container } from "react-bootstrap-grid-component/dist/Container";
+import { Column } from "react-bootstrap-grid-component/dist/Column";
+import { Row } from "react-bootstrap-grid-component/dist/Row";
+
+<Container>
+    <Row>
+        <Column />
+    </Row>
+</Container>
 ```
 
 #### Properties
@@ -52,20 +87,23 @@ children: Array<React.ReactElement<Column>> | React.ReactElement<Column>;
 
 ### Column
 
-You are able to use a Column without a Row if you want.
-
 ```tsx
-import { Column } from "./components/Column";
-import { Row } from "./components/Row";
+import 'bootstrap/scss/bootstrap.scss';
+import 'react-bootstrap-grid-component/dist/sizingbreakpoints.scss';
+import { Container } from "react-bootstrap-grid-component/dist/Container";
+import { Column } from "react-bootstrap-grid-component/dist/Column";
+import { Row } from "react-bootstrap-grid-component/dist/Row";
 
-<Row>
-  <Column size="6">
-    <div>Content</div>
-  </Column>
-  <Column size={xs:12,md:6}>
-    <div>Content</div>
-  </Column>
-</Row>
+<Container>
+    <Row>
+    <Column size="6">
+        <div>Content</div>
+    </Column>
+    <Column size={xs:12,md:6}>
+        <div>Content</div>
+    </Column>
+    </Row>
+</Container>
 ```
 #### Properties
 
@@ -100,7 +138,7 @@ Depending if you want to apply changes globaly or only in one/couple of componen
 the prefix on top of desired page
 
 ```tsx
-import prefixes from './components/PrefixManager';
+import prefixes from 'react-bootstrap-grid-component/dist/PrefixManager';
 
 prefixes.container | prefixes.column | prefixes.row = 'h-';
 ```
