@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Viewport } from '../config/config';
+import { Viewport } from './config';
 import prefixes from './PrefixManager';
 
 type VerticalAlignment = 'center' | 'start' | 'end';

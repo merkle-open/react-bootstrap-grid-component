@@ -3,7 +3,7 @@
 	"compilerOptions": {
 		"declaration": true,
 		"allowJs": false,
-		"baseUrl": "./src"
+		"rootDir": "./src/components"
 	},
 	"exclude": [
 		"node_modules",

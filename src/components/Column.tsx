@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Size, Viewport } from '../config/config';
+import { Size, Viewport } from './config';
 import prefixes from './PrefixManager';
 
 type Direction = 'row' | 'col';
