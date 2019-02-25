@@ -1,18 +1,12 @@
-@import "bootstrap/scss/bootstrap.scss";
+
+@import '~bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/_mixins.scss';
 
 //stylelint-disable declaration-no-important
 //
 // Extending Bootstrap default width declaration (h-w-25, h-w-50, h-w-75, h-w-100) with breakpoints
 //
-$grid-breakpoints: (
-  xs: 0,
-  sm: 640px,
-  md: 1024px,
-  lg: 1440px,
-  xl: 1650px
-);
-
-$helper-css-prefix: "";
+$helper-css-prefix: "" !default;
 @each $breakpoint in map-keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
