@@ -106,6 +106,7 @@ function getDirectionForBreakpoints(directionBreakpoints: DirectionViewport): { 
 
 function populateOuterClasses(sizeBreakpointsName: Viewport, breakpointSize: number | undefined): string[] {
 	const outerClassNames: string[] = [];
+
 	if (breakpointSize === 0) {
 		outerClassNames.push(`${prefixes.row}d${viewportClassPrefix(sizeBreakpointsName)}-none`);
 	} else {
@@ -178,7 +179,7 @@ export class Column extends React.PureComponent<ColumnProps> {
 		const offsetBreakpoints = typeof offset === 'number' ? { xs: offset } : offset || {};
 		const orderBreakpoints = typeof order === 'number' || typeof order === 'string' ? { xs: order } : order || {};
 
-		if (!sizeBreakpoints.xs) {
+		if (!sizeBreakpoints.xs && sizeBreakpoints.xs !== 0) {
 			sizeBreakpoints.xs = undefined;
 		}
 
