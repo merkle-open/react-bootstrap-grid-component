@@ -4,17 +4,18 @@ import prefixes from './PrefixManager';
 interface Props {
 	children?: React.ReactNode;
 	fluid?: boolean;
-}
-
-function getClassName(isFluid: boolean | undefined): string {
-	const className = isFluid ? 'container-fluid' : 'container';
-	return className;
+	className?: string;
 }
 
 export class Container extends React.Component<Props> {
+	protected getClassName(): string {
+		const classNames = [this.props.fluid ? 'container-fluid' : 'container'];
+		if (this.props.className) {
+			classNames.push(this.props.className);
+		}
+		return `${prefixes.container}${classNames.join(' ')}`;
+	}
 	public render() {
-		const { fluid } = this.props;
-		const className = `${prefixes.container}${getClassName(fluid)}`;
-		return <div className={className}>{this.props.children}</div>;
+		return <div className={this.getClassName()}>{this.props.children}</div>;
 	}
 }
