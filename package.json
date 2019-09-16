@@ -18,14 +18,14 @@
     "dist/"
   ],
   "scripts": {
-	"clean": "npx rimraf package-lock.json node_modules",
+    "clean": "npx rimraf package-lock.json node_modules",
     "prepublishOnly": "npm-run-all prepublishOnly:*",
     "prepublishOnly:clean": "rimraf dist",
     "prepublishOnly:typescript": "tsc -p tsconfig.prod.json",
     "prepublishOnly:scss": "copyfiles -f src/components/sizingbreakpoints.scss dist/",
     "prepublishOnly:pkg-ok": "pkg-ok",
     "prettier": "prettier --write \"**/*.*(js|jsx|ts|tsx|json)\"",
-	"release": "standard-version",
+    "release": "standard-version",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "update-dependencies": "npx npm-check-updates -u"
   },
