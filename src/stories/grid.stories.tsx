@@ -6,8 +6,6 @@ import { Column } from '../components/Column';
 import { Row } from '../components/Row';
 import { Container } from '../components/Container';
 import { BackgroundHelper } from '../demo/components/BackgroundHelper';
-import ReadMe from '../../README.md';
-import { withReadme } from 'storybook-readme';
 import JSXAddon from 'storybook-addon-jsx';
 
 import '../demo/css/backgroundHelper.css';
@@ -18,7 +16,6 @@ setAddon(JSXAddon);
 
 const stories = storiesOf('Playground', module);
 stories.addDecorator(withKnobs);
-stories.addDecorator(withReadme(ReadMe));
 
 const isActive = {
 	true: true,

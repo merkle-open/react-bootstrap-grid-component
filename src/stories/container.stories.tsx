@@ -4,14 +4,11 @@ import { Column } from '../components/Column';
 import { Row } from '../components/Row';
 import { Container } from '../components/Container';
 import { BackgroundHelper } from '../demo/components/BackgroundHelper';
-import ReadMe from '../../README.md';
-import { withReadme } from 'storybook-readme';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
 
 const stories = storiesOf('Example/Container', module);
-stories.addDecorator(withReadme(ReadMe));
 
 stories['addWithJSX']('Container Fluid', () => (
 	<BackgroundHelper>

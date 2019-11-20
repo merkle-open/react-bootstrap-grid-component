@@ -4,13 +4,10 @@ import { Column } from '../components/Column';
 import { Row } from '../components/Row';
 import { Container } from '../components/Container';
 import { BackgroundHelper } from '../demo/components/BackgroundHelper';
-import ReadMe from '../../README.md';
-import { withReadme } from 'storybook-readme';
 import JSXAddon from 'storybook-addon-jsx';
 
 setAddon(JSXAddon);
 const stories = storiesOf('Example/Column', module);
-stories.addDecorator(withReadme(ReadMe));
 
 stories['addWithJSX']('Vertical Alignment Behavior', () => (
 	<div className="Col-verticalAlignment">
