@@ -50,9 +50,8 @@
     "react-dom": "^16.5.2",
     "rimraf": "2.6.3",
     "sass-loader": "7.1.0",
-    "standard-version": "4.4.0",
+    "standard-version": "^4.4.0",
     "storybook-addon-jsx": "6.0.0",
-    "storybook-readme": "4.0.5",
     "typescript": "3.2.4"
   }
 }
