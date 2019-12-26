@@ -30,6 +30,7 @@ interface Props {
 	 * Rows must contain only columns to prevent negative margin issues
 	 */
 	children: React.ReactNode;
+	className?: string;
 }
 
 const viewportClassPrefix = (viewport: Viewport) => (viewport === 'xs' ? '' : '-' + viewport);
@@ -53,7 +54,7 @@ function populateClasses(
 
 export class Row extends React.Component<Props> {
 	public render() {
-		const { verticalAlignment, horizontalAlignment, noGutters } = this.props;
+		const { verticalAlignment, horizontalAlignment, noGutters, className } = this.props;
 		const classNames = [`${prefixes.row}row`];
 		const verticalAlignmentBreakpoints = setAlignment(verticalAlignment);
 		const horizontalAlignmentBreakpoints = setAlignment(horizontalAlignment);
@@ -70,6 +71,10 @@ export class Row extends React.Component<Props> {
 
 		if (noGutters) {
 			classNames.push(`${prefixes.row}no-gutters`);
+		}
+
+		if (className) {
+			classNames.push(className);
 		}
 
 		return <div className={classNames.join(' ')}>{this.props.children}</div>;

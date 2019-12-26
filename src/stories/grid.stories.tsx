@@ -1,7 +1,7 @@
 import 'bootstrap/scss/bootstrap.scss';
 import * as React from 'react';
 import { storiesOf, setAddon } from '@storybook/react';
-import { withKnobs, radios, select } from '@storybook/addon-knobs';
+import { withKnobs, radios, select, text } from '@storybook/addon-knobs';
 import { Column } from '../components/Column';
 import { Row } from '../components/Row';
 import { Container } from '../components/Container';
@@ -94,8 +94,12 @@ const verticalAlignmentColumn = {
 stories['addWithJSX']('Grid', () => (
 	<div className="Grid">
 		<BackgroundHelper>
-			<Container fluid={select('Fluid', isActive, false, 'Container Fluid')}>
+			<Container
+				className={text('className: Container', 'classname-example-container', 'Classname')}
+				fluid={select('Fluid', isActive, false, 'Container Fluid')}
+			>
 				<Row
+					className={text('className: Row', 'classname-example-row', 'Classname')}
 					horizontalAlignment={{
 						xs: radios('Horizontal alignment row - xs', horizontalAlignmentRow, 'center', 'xs'),
 						sm: radios('Horizontal alignment row - sm', horizontalAlignmentRow, 'center', 'sm'),
@@ -113,6 +117,7 @@ stories['addWithJSX']('Grid', () => (
 					noGutters={select('No Gutter', isActive, false, 'Row - no Gutters')}
 				>
 					<Column
+						className={text('className: Column', 'classname-example-column', 'Classname')}
 						size={{
 							xs: select('Size - xs - left column', size, 4, 'xs'),
 							sm: select('Size - sm - left column', size, 4, 'sm'),
@@ -155,6 +160,7 @@ stories['addWithJSX']('Grid', () => (
 						</div>
 					</Column>
 					<Column
+						className={text('className: Column', 'classname-example-column', 'Classname')}
 						size={{
 							xs: select('Size - xs - right column', size, 8, 'xs'),
 							sm: select('Size - sm - right column', size, 8, 'sm'),
