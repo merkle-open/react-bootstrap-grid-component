@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { storiesOf, setAddon } from '@storybook/react';
 import { Column } from '../components/Column';
 import { Row } from '../components/Row';
 import { Container } from '../components/Container';
 import { BackgroundHelper } from '../demo/components/BackgroundHelper';
-import JSXAddon from 'storybook-addon-jsx';
+import './stories.scss';
 
-setAddon(JSXAddon);
-const stories = storiesOf('Example/Row', module);
+export default {
+	component: Row,
+	title: 'Example/Row',
+	decorators: [],
+};
 
-stories['addWithJSX']('Vertical Alignment Behavior', () => (
+export const VerticalAlignmentBehavior = () => (
 	<div className="Row-verticalAlignment">
 		<BackgroundHelper>
 			<Container>
@@ -34,9 +36,9 @@ stories['addWithJSX']('Vertical Alignment Behavior', () => (
 			</Container>
 		</BackgroundHelper>
 	</div>
-));
+);
 
-stories['addWithJSX']('Horizontal Alignment Behavior', () => (
+export const HorizontalAlignmentBehavior = () => (
 	<BackgroundHelper>
 		<Container>
 			<Row>
@@ -76,9 +78,9 @@ stories['addWithJSX']('Horizontal Alignment Behavior', () => (
 			</Row>
 		</Container>
 	</BackgroundHelper>
-));
+);
 
-stories['addWithJSX']('No Gutters Behavior', () => (
+export const NoGuttersBehavior = () => (
 	<BackgroundHelper>
 		<Container>
 			<Row>
@@ -111,9 +113,9 @@ stories['addWithJSX']('No Gutters Behavior', () => (
 			</Row>
 		</Container>
 	</BackgroundHelper>
-));
+);
 
-stories['addWithJSX']('Nested Rows - Horizontal Alignment Behavior', () => (
+export const NestedRowsHorizontalAlignmentBehavior = () => (
 	<BackgroundHelper>
 		<Container>
 			<div>
@@ -154,9 +156,9 @@ stories['addWithJSX']('Nested Rows - Horizontal Alignment Behavior', () => (
 			</Row>
 		</Container>
 	</BackgroundHelper>
-));
+);
 
-stories['addWithJSX']('Nested Rows - Verticalal Alignment Behavior', () => (
+export const NestedRowsVerticalalAlignmentBehavior = () => (
 	<div className="Row-verticalAlignment">
 		<BackgroundHelper>
 			<Container>
@@ -199,4 +201,4 @@ stories['addWithJSX']('Nested Rows - Verticalal Alignment Behavior', () => (
 			</Container>
 		</BackgroundHelper>
 	</div>
-));
+);

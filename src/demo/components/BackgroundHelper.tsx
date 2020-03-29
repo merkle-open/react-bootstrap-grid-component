@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React from 'react';
+import './backgroundHelper.scss';
 
-interface Props {
+interface IBackgorundHelperProps {
 	children?: any;
 }
 
@@ -12,8 +13,6 @@ export function getDummyText(count: number = 45, str: string = 'Â» S P A C E R Â
 	return txt;
 }
 
-export class BackgroundHelper extends React.PureComponent<Props> {
-	public render() {
-		return <div className="background-helper">{this.props.children}</div>;
-	}
-}
+export const BackgroundHelper = (props: IBackgorundHelperProps) => (
+	<div className="background-helper">{props.children}</div>
+);

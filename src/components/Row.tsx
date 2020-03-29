@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Viewport } from './config';
 import prefixes from './PrefixManager';
+import './sizingbreakpoints.scss';
 
 type VerticalAlignment = 'center' | 'start' | 'end';
 type VerticalAlignmentViewport = { [key in Viewport]?: VerticalAlignment };
@@ -13,7 +14,7 @@ type alignmentValue =
 	| HorizontalAlignment
 	| undefined;
 
-interface Props {
+interface IRowProps {
 	/**
 	 * https://getbootstrap.com/docs/4.0/layout/grid/#vertical-alignment
 	 */
@@ -51,27 +52,24 @@ function populateClasses(
 	return classNames;
 }
 
-export class Row extends React.Component<Props> {
-	public render() {
-		const { verticalAlignment, horizontalAlignment, noGutters } = this.props;
-		const classNames = [`${prefixes.row}row`];
-		const verticalAlignmentBreakpoints = setAlignment(verticalAlignment);
-		const horizontalAlignmentBreakpoints = setAlignment(horizontalAlignment);
+export const Row = ({ verticalAlignment, horizontalAlignment, noGutters, children }: IRowProps) => {
+	const classNames = [`${prefixes.row}row`];
+	const verticalAlignmentBreakpoints = setAlignment(verticalAlignment);
+	const horizontalAlignmentBreakpoints = setAlignment(horizontalAlignment);
 
-		if (verticalAlignment) {
-			const verticalAlignmentClassNames = populateClasses(verticalAlignmentBreakpoints, 'align-items');
-			classNames.push(...verticalAlignmentClassNames);
-		}
-
-		if (horizontalAlignment) {
-			const horizontalAlignmentClassNames = populateClasses(horizontalAlignmentBreakpoints, 'justify-content');
-			classNames.push(...horizontalAlignmentClassNames);
-		}
-
-		if (noGutters) {
-			classNames.push(`${prefixes.row}no-gutters`);
-		}
-
-		return <div className={classNames.join(' ')}>{this.props.children}</div>;
+	if (verticalAlignment) {
+		const verticalAlignmentClassNames = populateClasses(verticalAlignmentBreakpoints, 'align-items');
+		classNames.push(...verticalAlignmentClassNames);
 	}
-}
+
+	if (horizontalAlignment) {
+		const horizontalAlignmentClassNames = populateClasses(horizontalAlignmentBreakpoints, 'justify-content');
+		classNames.push(...horizontalAlignmentClassNames);
+	}
+
+	if (noGutters) {
+		classNames.push(`${prefixes.row}no-gutters`);
+	}
+
+	return <div className={classNames.join(' ')}>{children}</div>;
+};

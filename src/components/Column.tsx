@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Size, Viewport } from './config';
 import prefixes from './PrefixManager';
+import './sizingbreakpoints.scss';
 
 type Direction = 'row' | 'col';
 type DirectionViewport = { [key in Viewport]?: Direction };
@@ -16,7 +17,7 @@ type Order = 'first' | 'last';
 type OrderViewport = { [key in Viewport]?: Size | Order };
 type Placement = 'order' | 'offset';
 
-export interface ColumnProps {
+export interface IColumnProps {
 	children?: any;
 	size?: Size | { [key in Viewport]?: Size };
 	direction?: Direction | DirectionViewport;
@@ -167,72 +168,70 @@ function populateInnerClasses(
 	return innerClassName;
 }
 
-export class Column extends React.PureComponent<ColumnProps> {
-	public render() {
-		const { size, direction, verticalAlignment, horizontalAlignment, offset, order, className } = this.props;
-		const sizeBreakpoints = typeof size === 'number' ? { xs: size } : size || {};
-		const directionBreakpoints = typeof direction === 'string' ? { xs: direction } : direction || {};
-		const verticalAlignmentBreakpoints =
-			typeof verticalAlignment === 'string' ? { xs: verticalAlignment } : verticalAlignment || {};
-		const horizontalAlignmentBreakpoints =
-			typeof horizontalAlignment === 'string' ? { xs: horizontalAlignment } : horizontalAlignment || {};
-		const offsetBreakpoints = typeof offset === 'number' ? { xs: offset } : offset || {};
-		const orderBreakpoints = typeof order === 'number' || typeof order === 'string' ? { xs: order } : order || {};
+export const Column = (props: IColumnProps) => {
+	const { size, direction, verticalAlignment, horizontalAlignment, offset, order, className } = props;
+	const sizeBreakpoints = typeof size === 'number' ? { xs: size } : size || {};
+	const directionBreakpoints = typeof direction === 'string' ? { xs: direction } : direction || {};
+	const verticalAlignmentBreakpoints =
+		typeof verticalAlignment === 'string' ? { xs: verticalAlignment } : verticalAlignment || {};
+	const horizontalAlignmentBreakpoints =
+		typeof horizontalAlignment === 'string' ? { xs: horizontalAlignment } : horizontalAlignment || {};
+	const offsetBreakpoints = typeof offset === 'number' ? { xs: offset } : offset || {};
+	const orderBreakpoints = typeof order === 'number' || typeof order === 'string' ? { xs: order } : order || {};
 
-		if (!sizeBreakpoints.xs && sizeBreakpoints.xs !== 0) {
-			sizeBreakpoints.xs = undefined;
-		}
-
-		if (!directionBreakpoints.xs) {
-			directionBreakpoints.xs = 'row';
-		}
-		if (!verticalAlignmentBreakpoints.xs) {
-			verticalAlignmentBreakpoints.xs = 'top';
-		}
-		if (!horizontalAlignmentBreakpoints.xs) {
-			horizontalAlignmentBreakpoints.xs = 'stretch';
-		}
-
-		const outerClassName = className ? [className] : [];
-		const innerClassName = [`${prefixes.column}d-flex`];
-
-		Object.keys(sizeBreakpoints).forEach((sizeBreakpointsName: keyof typeof sizeBreakpoints) => {
-			const breakpointSize = sizeBreakpoints[sizeBreakpointsName];
-			const outerClassNames = populateOuterClasses(sizeBreakpointsName, breakpointSize);
-			outerClassName.push(...outerClassNames);
-		});
-
-		Object.keys(directionBreakpoints).forEach((directionBreakpointName: keyof typeof directionBreakpoints) => {
-			const breakpointDirection = directionBreakpoints[directionBreakpointName];
-			if (breakpointDirection) {
-				innerClassName.push(flexAlignment[breakpointDirection].direction(directionBreakpointName));
-			}
-		});
-
-		const offsetOuterClassNames = populatePlacementClasses(offsetBreakpoints, 'offset');
-		const orderOuterClassNames = populatePlacementClasses(orderBreakpoints, 'order');
-
-		outerClassName.push(...offsetOuterClassNames, ...orderOuterClassNames);
-
-		const calculatedFlexDirections = getDirectionForBreakpoints(directionBreakpoints);
-
-		const verticalInnerClassNames = populateInnerClasses(
-			verticalAlignmentBreakpoints,
-			calculatedFlexDirections,
-			'vertical'
-		);
-		const horizontalInnerClassNames = populateInnerClasses(
-			horizontalAlignmentBreakpoints,
-			calculatedFlexDirections,
-			'horizontal'
-		);
-
-		innerClassName.push(...verticalInnerClassNames, ...horizontalInnerClassNames);
-
-		return (
-			<div className={outerClassName.join(' ').trim()}>
-				<div className={innerClassName.join(' ').trim()}>{this.props.children}</div>
-			</div>
-		);
+	if (!sizeBreakpoints.xs && sizeBreakpoints.xs !== 0) {
+		sizeBreakpoints.xs = undefined;
 	}
-}
+
+	if (!directionBreakpoints.xs) {
+		directionBreakpoints.xs = 'row';
+	}
+	if (!verticalAlignmentBreakpoints.xs) {
+		verticalAlignmentBreakpoints.xs = 'top';
+	}
+	if (!horizontalAlignmentBreakpoints.xs) {
+		horizontalAlignmentBreakpoints.xs = 'stretch';
+	}
+
+	const outerClassName = className ? [className] : [];
+	const innerClassName = [`${prefixes.column}d-flex`];
+
+	Object.keys(sizeBreakpoints).forEach((sizeBreakpointsName: keyof typeof sizeBreakpoints) => {
+		const breakpointSize = sizeBreakpoints[sizeBreakpointsName];
+		const outerClassNames = populateOuterClasses(sizeBreakpointsName, breakpointSize);
+		outerClassName.push(...outerClassNames);
+	});
+
+	Object.keys(directionBreakpoints).forEach((directionBreakpointName: keyof typeof directionBreakpoints) => {
+		const breakpointDirection = directionBreakpoints[directionBreakpointName];
+		if (breakpointDirection) {
+			innerClassName.push(flexAlignment[breakpointDirection].direction(directionBreakpointName));
+		}
+	});
+
+	const offsetOuterClassNames = populatePlacementClasses(offsetBreakpoints, 'offset');
+	const orderOuterClassNames = populatePlacementClasses(orderBreakpoints, 'order');
+
+	outerClassName.push(...offsetOuterClassNames, ...orderOuterClassNames);
+
+	const calculatedFlexDirections = getDirectionForBreakpoints(directionBreakpoints);
+
+	const verticalInnerClassNames = populateInnerClasses(
+		verticalAlignmentBreakpoints,
+		calculatedFlexDirections,
+		'vertical'
+	);
+	const horizontalInnerClassNames = populateInnerClasses(
+		horizontalAlignmentBreakpoints,
+		calculatedFlexDirections,
+		'horizontal'
+	);
+
+	innerClassName.push(...verticalInnerClassNames, ...horizontalInnerClassNames);
+
+	return (
+		<div className={outerClassName.join(' ').trim()}>
+			<div className={innerClassName.join(' ').trim()}>{props.children}</div>
+		</div>
+	);
+};

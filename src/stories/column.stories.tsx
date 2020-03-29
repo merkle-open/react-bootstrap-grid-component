@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { storiesOf, setAddon } from '@storybook/react';
 import { Column } from '../components/Column';
 import { Row } from '../components/Row';
 import { Container } from '../components/Container';
 import { BackgroundHelper } from '../demo/components/BackgroundHelper';
-import JSXAddon from 'storybook-addon-jsx';
+import './stories.scss';
 
-setAddon(JSXAddon);
-const stories = storiesOf('Example/Column', module);
+export default {
+	title: 'Example/Column',
+	decorators: [],
+};
 
-stories['addWithJSX']('Vertical Alignment Behavior', () => (
+export const VerticalAlignmentBehavior = () => (
 	<div className="Col-verticalAlignment">
 		<BackgroundHelper>
 			<Container>
@@ -44,9 +45,9 @@ stories['addWithJSX']('Vertical Alignment Behavior', () => (
 			</Container>
 		</BackgroundHelper>
 	</div>
-));
+);
 
-stories['addWithJSX']('Horizontal Alignment Behavior', () => (
+export const HorizontalAlignmentBehavior = () => (
 	<BackgroundHelper>
 		<Container>
 			<Row>
@@ -76,9 +77,9 @@ stories['addWithJSX']('Horizontal Alignment Behavior', () => (
 			</Row>
 		</Container>
 	</BackgroundHelper>
-));
+);
 
-stories['addWithJSX']('Direction Behavior', () => (
+export const DirectionBehavior = () => (
 	<BackgroundHelper>
 		<Container>
 			<Row>
@@ -108,9 +109,9 @@ stories['addWithJSX']('Direction Behavior', () => (
 			</Row>
 		</Container>
 	</BackgroundHelper>
-));
+);
 
-stories['addWithJSX']('Offset Behavior', () => (
+export const OffsetBehavior = () => (
 	<BackgroundHelper>
 		<Container>
 			<Row>
@@ -133,9 +134,9 @@ stories['addWithJSX']('Offset Behavior', () => (
 			</Row>
 		</Container>
 	</BackgroundHelper>
-));
+);
 
-stories['addWithJSX']('Order Behavior', () => (
+export const OrderBehavior = () => (
 	<BackgroundHelper>
 		<Container>
 			<Row>
@@ -182,9 +183,9 @@ stories['addWithJSX']('Order Behavior', () => (
 			</Row>
 		</Container>
 	</BackgroundHelper>
-));
+);
 
-stories['addWithJSX']('Nested Columns - Vertical Alignment Behvior', () => (
+export const NestedColumnsVerticalAlignmentBehvior = () => (
 	<div className="Col-verticalAlignment">
 		<BackgroundHelper>
 			<Container>
@@ -215,9 +216,9 @@ stories['addWithJSX']('Nested Columns - Vertical Alignment Behvior', () => (
 			</Container>
 		</BackgroundHelper>
 	</div>
-));
+);
 
-stories['addWithJSX']('Nested Columns - Horizontal Alignment Behvior', () => (
+export const NestedColumnsHorizontalAlignmentBehvior = () => (
 	<div className="Col-verticalAlignment">
 		<BackgroundHelper>
 			<Container>
@@ -248,4 +249,4 @@ stories['addWithJSX']('Nested Columns - Horizontal Alignment Behvior', () => (
 			</Container>
 		</BackgroundHelper>
 	</div>
-));
+);

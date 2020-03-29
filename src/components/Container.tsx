@@ -1,7 +1,8 @@
 import * as React from 'react';
 import prefixes from './PrefixManager';
+import './sizingbreakpoints.scss';
 
-interface Props {
+interface IContainerProps {
 	children?: React.ReactNode;
 	fluid?: boolean;
 }
@@ -11,10 +12,8 @@ function getClassName(isFluid: boolean | undefined): string {
 	return className;
 }
 
-export class Container extends React.Component<Props> {
-	public render() {
-		const { fluid } = this.props;
-		const className = `${prefixes.container}${getClassName(fluid)}`;
-		return <div className={className}>{this.props.children}</div>;
-	}
-}
+export const Container = (props: IContainerProps) => {
+	const { fluid } = props;
+	const className = `${prefixes.container}${getClassName(fluid)}`;
+	return <div className={className}>{props.children}</div>;
+};
