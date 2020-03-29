@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.2.3](https://github.com/namics/react-bootstrap-grid-component/compare/v0.2.2...v0.2.3) (2020-03-29)
+
+
+### Features
+
+* **components:** update stories ([535eb98](https://github.com/namics/react-bootstrap-grid-component/commit/535eb9828b09ec10f0b377cb6303516c0ade23ef))
 
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/namics/react-bootstrap-grid-component/compare/v0.2.1...v0.2.2) (2019-04-26)
