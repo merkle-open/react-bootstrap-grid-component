@@ -193,8 +193,8 @@ export const Column = (props: IColumnProps) => {
 		horizontalAlignmentBreakpoints.xs = 'stretch';
 	}
 
-	const outerClassName = className ? [className] : [];
-	const innerClassName = [`${prefixes.column}d-flex`];
+	const outerClassName: Array<string> = [];
+	const innerClassName: Array<string> = [`${prefixes.column}d-flex`];
 
 	Object.keys(sizeBreakpoints).forEach((sizeBreakpointsName: keyof typeof sizeBreakpoints) => {
 		const breakpointSize = sizeBreakpoints[sizeBreakpointsName];
@@ -228,6 +228,10 @@ export const Column = (props: IColumnProps) => {
 	);
 
 	innerClassName.push(...verticalInnerClassNames, ...horizontalInnerClassNames);
+
+	if (className) {
+		outerClassName.push(className);
+	}
 
 	return (
 		<div className={outerClassName.join(' ').trim()}>

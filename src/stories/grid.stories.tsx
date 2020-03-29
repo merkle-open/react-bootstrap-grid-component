@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { withKnobs, radios, select } from '@storybook/addon-knobs';
+import { withKnobs, radios, select, text } from '@storybook/addon-knobs';
 import { Column } from '../components/Column';
 import { Row } from '../components/Row';
 import { Container } from '../components/Container';
@@ -88,8 +88,12 @@ const verticalAlignmentColumn = {
 export const Grid = () => (
 	<div className="Grid">
 		<BackgroundHelper>
-			<Container fluid={select('Fluid', isActive as any, false as any, 'Container Fluid')}>
+			<Container
+				fluid={select('Fluid', isActive as any, false as any, 'Container Fluid')}
+				className={text('className: Container', 'classname-example-container', 'Classname')}
+			>
 				<Row
+					className={text('className: Row', 'classname-example-row', 'Classname')}
 					horizontalAlignment={{
 						xs: radios('Horizontal alignment row - xs', horizontalAlignmentRow, 'center', 'xs') as
 							| 'start'
@@ -142,6 +146,7 @@ export const Grid = () => (
 					noGutters={select('No Gutter', isActive as any, false as any, 'Row - no Gutters')}
 				>
 					<Column
+						className={text('className: Column', 'classname-example-column', 'Classname')}
 						size={{
 							xs: select('Size - xs - left column', size, 4, 'xs') as Size,
 							sm: select('Size - sm - left column', size, 4, 'sm') as Size,
@@ -224,6 +229,7 @@ export const Grid = () => (
 						</div>
 					</Column>
 					<Column
+						className={text('className: Column', 'classname-example-column', 'Classname')}
 						size={{
 							xs: select('Size - xs - right column', size, 8, 'xs') as Size,
 							sm: select('Size - sm - right column', size, 8, 'sm') as Size,

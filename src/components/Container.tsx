@@ -5,15 +5,16 @@ import './sizingbreakpoints.scss';
 interface IContainerProps {
 	children?: React.ReactNode;
 	fluid?: boolean;
-}
-
-function getClassName(isFluid: boolean | undefined): string {
-	const className = isFluid ? 'container-fluid' : 'container';
-	return className;
+	className?: string;
 }
 
 export const Container = (props: IContainerProps) => {
-	const { fluid } = props;
-	const className = `${prefixes.container}${getClassName(fluid)}`;
-	return <div className={className}>{props.children}</div>;
+	function getClassName(): string {
+		const classNames = [props.fluid ? 'container-fluid' : 'container'];
+		if (props.className) {
+			classNames.push(props.className);
+		}
+		return `${prefixes.container}${classNames.join(' ')}`;
+	}
+	return <div className={getClassName()}>{props.children}</div>;
 };
