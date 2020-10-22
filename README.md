@@ -99,7 +99,7 @@ import { Row } from "react-bootstrap-grid-component/dist/Row";
     <Column size="6">
         <div>Content</div>
     </Column>
-    <Column size={xs:12,md:6}>
+    <Column size={{xs:12,md:6}}>
         <div>Content</div>
     </Column>
     </Row>
